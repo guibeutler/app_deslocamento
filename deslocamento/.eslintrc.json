@@ -1,3 +1,23 @@
 {
-  "extends": "next/core-web-vitals"
+  "extends": ["react-app"],
+  "plugins": ["prettier"],
+  "globals": {
+    "config": true
+  },
+  "rules": {
+    "import/no-anonymous-default-export": "off",
+    "react-hooks/exhaustive-deps": "off",
+    "prettier/prettier": "error",
+    "no-unused-expressions": "off",
+    "no-unused-vars": "off",
+    "no-undef": "off",
+    "jsx-a11y/anchor-is-valid": [
+      "error",
+      {
+        "components": ["Link"],
+        "specialLink": ["hrefLeft", "hrefRight"],
+        "aspects": ["noHref", "invalidHref", "preferButton"]
+      }
+    ]
+  }
 }

@@ -1,17 +1,19 @@
-"use client";
-import React from "react";
-import { Card, CardContent, TextField, Button } from "@mui/material";
+'use client'
+import React from 'react'
+import { Card } from '@mui/material'
 
-import "./style.css";
+import './style.css'
+import ClientList from '@/components/Clients'
 
 const CardWithInputs = () => {
-  return (
-    <div className="card-container">
-      <Card>
-        <h3>Escolha uma das opções acima!</h3>
-      </Card>
-    </div>
-  );
-};
+	return (
+		<div className="card-container">
+			<Card>
+				<h3>Clientes</h3>
+				<ClientList />
+			</Card>
+		</div>
+	)
+}
 
-export default CardWithInputs;
+export default CardWithInputs
