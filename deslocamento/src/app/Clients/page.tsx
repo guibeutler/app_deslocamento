@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { URL_BASE } from '../../constants/URL_BASE'
-import axios from 'axios'
+import { getClients } from './services/getClients'
 import Avatar from '@mui/material/Avatar'
 import IconButton from '@mui/material/IconButton'
 import List from '@mui/material/List'
@@ -10,29 +9,21 @@ import ListItemText from '@mui/material/ListItemText'
 import Pagination from '@mui/material/Pagination'
 import InfoIcon from '@mui/icons-material/Info'
 import AccountCircleIcon from '@mui/icons-material/AccountCircle'
-
-import './style.css'
 import IClient from '@/interfaces/client/client.interface'
 
-const getData = async () => {
-	try {
-		const response = await axios.get(`${URL_BASE}/Cliente`)
-
-		return response.data
-	} catch (error) {
-		return error
-	}
-}
+import './style.css'
+import Link from 'next/link'
+import CardWithInputs from '@components/Card'
 
 const itemsPerPage = 4
 
-export default function ClientList() {
+export default function ClientsListPage() {
 	const [currentPage, setCurrentPage] = useState(1)
 	const [response, setResponse] = useState([])
 
 	useEffect(() => {
 		const fetchData = async () => {
-			const data = await getData()
+			const data = await getClients()
 			setResponse(data)
 		}
 
@@ -55,9 +46,11 @@ export default function ClientList() {
 						<ListItem
 							key={client.id}
 							secondaryAction={
-								<IconButton edge="end" aria-label="delete">
-									<InfoIcon />
-								</IconButton>
+								<Link href={`/Clients/${client.id}`}>
+									<IconButton edge="end" aria-label="delete">
+										<InfoIcon />
+									</IconButton>
+								</Link>
 							}
 						>
 							<ListItemAvatar>
@@ -65,6 +58,7 @@ export default function ClientList() {
 									<AccountCircleIcon />
 								</Avatar>
 							</ListItemAvatar>
+
 							<ListItemText
 								primary={`Nome: ${client.nome}`}
 								secondary={`Estado: ${client.uf}`}

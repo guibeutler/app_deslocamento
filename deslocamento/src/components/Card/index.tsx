@@ -3,7 +3,7 @@ import React from 'react'
 import { Card } from '@mui/material'
 
 import './style.css'
-import ClientList from '@/components/Clients'
+import ClientList from '@app/Clients/page'
 
 const CardWithInputs = () => {
 	return (
