@@ -38,3 +38,9 @@
 	-webkit-user-select: none;
 	touch-action: manipulation;
 }
+
+.header-card {
+	display: flex;
+	align-items: center;
+	justify-content: space-evenly;
+}

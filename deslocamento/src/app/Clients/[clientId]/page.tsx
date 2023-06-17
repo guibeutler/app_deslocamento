@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import React from 'react'
 import { getClientById } from '../services/getClientById'
 
 export default async function ClientDetailsPage({
