@@ -22,7 +22,7 @@ const CardWithInputs = () => {
 		<div className="card-container">
 			<Card>
 				<div className="header-card">
-					<h3>Lista de Clientes</h3>
+					{/* <h3>Lista de Clientes</h3>
 					<Button
 						onClick={handleOpenModal}
 						className="button-55"
@@ -31,11 +31,11 @@ const CardWithInputs = () => {
 					>
 						Criar
 						<AddIcon sx={{ fontSize: '14px' }} />
-					</Button>
+					</Button> */}
 				</div>
-				<ClientList />
+				{/* <ClientList /> */}
 			</Card>
-			<BasicModal open={modalOpen} onClose={handleCloseModal} />
+			{/* <BasicModal open={modalOpen} onClose={handleCloseModal} /> */}
 		</div>
 	)
 }

@@ -1,6 +1,19 @@
 import React from 'react'
-import { Box, Button, Typography, Modal, TextField } from '@mui/material'
 import { createClient } from '@app/Clients/services/createClient'
+import { useForm, SubmitHandler } from 'react-hook-form'
+import { yupResolver } from '@hookform/resolvers/yup'
+import * as yup from 'yup'
+import {
+	Box,
+	Button,
+	Typography,
+	Modal,
+	TextField,
+	Select,
+	MenuItem,
+} from '@mui/material'
+import IClientCreate from '@interfaces/client/client.create.interface'
+import UF from './mockUf.json'
 
 const style = {
 	position: 'absolute' as 'absolute',
@@ -19,28 +32,57 @@ interface BasicModalProps {
 	onClose: () => void
 }
 
-const BasicModal: React.FC<BasicModalProps> = ({ open, onClose }) => {
-	const [formData, setFormData] = React.useState({
-		nome: '',
-		logradouro: '',
-		numero: '',
-		bairro: '',
-		cidade: '',
-		uf: '',
-		numeroDocumento: '',
-		tipoDocumento: '',
+const schema = yup.object().shape({
+	nome: yup
+		.string()
+		.required('Nome é obrigatório')
+		.min(8, 'Nome deve ter no mínimo 8 caracteres')
+		.max(50, 'Nome deve ter no máximo 50 caracteres'),
+	logradouro: yup
+		.string()
+		.required('Logradouro é obrigatório')
+		.min(10, 'Logradouro deve ter no mínimo 10 caracteres')
+		.max(50, 'Logradouro deve ter no máximo 50 caracteres'),
+	numero: yup
+		.string()
+		.required('Número é obrigatório')
+		.min(1, 'Número deve ter no mínimo 1 caracter')
+		.max(10, 'Número deve ter no máximo 10 caracteres'),
+	bairro: yup
+		.string()
+		.required('Bairro é obrigatório')
+		.min(6, 'Bairro deve ter no mínimo 6 caracteres')
+		.max(50, 'Bairro deve ter no máximo 50 caracteres'),
+	cidade: yup
+		.string()
+		.required('Cidade é obrigatório')
+		.min(3, 'Cidade deve ter no mínimo 3 caracteres')
+		.max(50, 'Cidade deve ter no máximo 50 caracteres'),
+	uf: yup.string().required('Estado é obrigatório'),
+	numeroDocumento: yup
+		.string()
+		.required('Nome é obrigatório')
+		.min(5, 'Número do documento deve ter no mínimo 5 caracteres')
+		.max(50, 'Número do documento deve ter no máximo 50 caracteres'),
+	tipoDocumento: yup
+		.string()
+		.required('Tipo do documento é obrigatório')
+		.min(2, 'Tipo do documento deve ter no mínimo 3 caracteres')
+		.max(50, 'Tipo do documento deve ter no máximo 50 caracteres'),
+})
+
+export default function BasicModal(props: BasicModalProps) {
+	const { open, onClose } = props
+	const {
+		register,
+		handleSubmit,
+		formState: { errors },
+	} = useForm<IClientCreate>({
+		resolver: yupResolver(schema),
 	})
-
-	const handleChange = (e) => {
-		const { name, value } = e.target
-		setFormData((prevData) => ({ ...prevData, [name]: value }))
-	}
-
-	const handleSubmit = (e) => {
-		e.preventDefault()
-		createClient(formData)
-		console.log(formData)
-		onClose() // Feche o modal após enviar os dados
+	const onSubmit: SubmitHandler<IClientCreate> = (data) => {
+		createClient(data)
+		onClose()
 	}
 
 	return (
@@ -61,7 +103,7 @@ const BasicModal: React.FC<BasicModalProps> = ({ open, onClose }) => {
 				</Typography>
 				<Typography id="modal-modal-description" sx={{ mt: 2 }}>
 					<form
-						onSubmit={handleSubmit}
+						onSubmit={handleSubmit(onSubmit)}
 						style={{
 							padding: '8px',
 							display: 'flex',
@@ -70,6 +112,7 @@ const BasicModal: React.FC<BasicModalProps> = ({ open, onClose }) => {
 						}}
 					>
 						<TextField
+							{...register('nome')}
 							fullWidth
 							size="small"
 							type="text"
@@ -77,10 +120,14 @@ const BasicModal: React.FC<BasicModalProps> = ({ open, onClose }) => {
 							label="Nome"
 							variant="outlined"
 							name="nome"
-							value={formData.nome}
-							onChange={handleChange}
 						/>
+						{errors.nome && (
+							<Typography variant="caption" color="error">
+								{errors.nome.message}
+							</Typography>
+						)}
 						<TextField
+							{...register('logradouro')}
 							fullWidth
 							size="small"
 							type="text"
@@ -88,10 +135,14 @@ const BasicModal: React.FC<BasicModalProps> = ({ open, onClose }) => {
 							label="Rua"
 							variant="outlined"
 							name="logradouro"
-							value={formData.logradouro}
-							onChange={handleChange}
 						/>
+						{errors.logradouro && (
+							<Typography variant="caption" color="error">
+								{errors.logradouro.message}
+							</Typography>
+						)}
 						<TextField
+							{...register('numero')}
 							fullWidth
 							size="small"
 							type="text"
@@ -99,10 +150,14 @@ const BasicModal: React.FC<BasicModalProps> = ({ open, onClose }) => {
 							label="Número"
 							variant="outlined"
 							name="numero"
-							value={formData.numero}
-							onChange={handleChange}
 						/>
+						{errors.numero && (
+							<Typography variant="caption" color="error">
+								{errors.numero.message}
+							</Typography>
+						)}
 						<TextField
+							{...register('bairro')}
 							fullWidth
 							size="small"
 							type="text"
@@ -110,10 +165,14 @@ const BasicModal: React.FC<BasicModalProps> = ({ open, onClose }) => {
 							label="Bairro"
 							variant="outlined"
 							name="bairro"
-							value={formData.bairro}
-							onChange={handleChange}
 						/>
+						{errors.bairro && (
+							<Typography variant="caption" color="error">
+								{errors.bairro.message}
+							</Typography>
+						)}
 						<TextField
+							{...register('cidade')}
 							fullWidth
 							size="small"
 							type="text"
@@ -121,21 +180,30 @@ const BasicModal: React.FC<BasicModalProps> = ({ open, onClose }) => {
 							label="Cidade"
 							variant="outlined"
 							name="cidade"
-							value={formData.cidade}
-							onChange={handleChange}
 						/>
-						<TextField
+						{errors.cidade && (
+							<Typography variant="caption" color="error">
+								{errors.cidade.message}
+							</Typography>
+						)}
+						<Select
+							{...register('uf')}
 							fullWidth
 							size="small"
-							type="text"
 							id="outlined-basic"
 							label="Estado"
 							variant="outlined"
 							name="uf"
-							value={formData.uf}
-							onChange={handleChange}
-						/>
+							error={!!errors.uf}
+						>
+							{UF.estadosDoBrasil.map((estado) => (
+								<MenuItem key={estado} value={estado}>
+									{estado}
+								</MenuItem>
+							))}
+						</Select>
 						<TextField
+							{...register('numeroDocumento')}
 							fullWidth
 							size="small"
 							type="text"
@@ -143,10 +211,14 @@ const BasicModal: React.FC<BasicModalProps> = ({ open, onClose }) => {
 							label="Número do documento"
 							variant="outlined"
 							name="numeroDocumento"
-							value={formData.numeroDocumento}
-							onChange={handleChange}
 						/>
+						{errors.numeroDocumento && (
+							<Typography variant="caption" color="error">
+								{errors.numeroDocumento.message}
+							</Typography>
+						)}
 						<TextField
+							{...register('tipoDocumento')}
 							fullWidth
 							size="small"
 							type="text"
@@ -154,9 +226,12 @@ const BasicModal: React.FC<BasicModalProps> = ({ open, onClose }) => {
 							label="Tipo de documento"
 							variant="outlined"
 							name="tipoDocumento"
-							value={formData.tipoDocumento}
-							onChange={handleChange}
 						/>
+						{errors.tipoDocumento && (
+							<Typography variant="caption" color="error">
+								{errors.tipoDocumento.message}
+							</Typography>
+						)}
 						<Button className="button-55" type="submit">
 							Enviar
 						</Button>
@@ -166,5 +241,3 @@ const BasicModal: React.FC<BasicModalProps> = ({ open, onClose }) => {
 		</Modal>
 	)
 }
-
-export default BasicModal

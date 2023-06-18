@@ -1,9 +1,7 @@
-import CardWithInputs from '@components/Card'
-
 export default function Home() {
 	return (
 		<div>
-			<CardWithInputs />
+			<h2>HOME PAGE</h2>
 		</div>
 	)
 }
