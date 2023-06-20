@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { createClient } from '@app/Clients/services/createClient'
 import { useForm, SubmitHandler } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
@@ -77,11 +77,13 @@ export default function BasicModal(props: BasicModalProps) {
 		register,
 		handleSubmit,
 		formState: { errors },
+		reset,
 	} = useForm<IClientCreate>({
 		resolver: yupResolver(schema),
 	})
 	const onSubmit: SubmitHandler<IClientCreate> = (data) => {
 		createClient(data)
+		reset()
 		onClose()
 	}
 

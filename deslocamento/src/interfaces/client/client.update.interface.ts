@@ -1,5 +1,5 @@
 export default interface IClientUpdate {
-	id: number
+	id: number | undefined
 	nome: string
 	logradouro: string
 	numero: string

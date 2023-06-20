@@ -17,16 +17,16 @@ export function SelectButtons(props: SelectButtonsProps) {
 				variant="outlined"
 				size="medium"
 			>
-				Cliente
+				Clientes
 			</Button>
 			<Button className="button-55" variant="outlined" size="medium">
-				Condutor
+				Condutores
 			</Button>
 			<Button className="button-55" variant="outlined" size="medium">
-				Veículo
+				Veículos
 			</Button>
 			<Button className="button-55" variant="outlined" size="medium">
-				Deslocamento
+				Deslocamentos
 			</Button>
 		</div>
 	)
