@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { createClient } from '@app/Clients/services/createClient'
 import { useForm, SubmitHandler } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
@@ -12,22 +12,13 @@ import {
 	Select,
 	MenuItem,
 } from '@mui/material'
+import FileUploadIcon from '@mui/icons-material/FileUpload'
 import IClientCreate from '@interfaces/client/client.create.interface'
 import UF from './mockUf.json'
 
-const style = {
-	position: 'absolute' as 'absolute',
-	top: '50%',
-	left: '50%',
-	transform: 'translate(-50%, -50%)',
-	width: 450,
-	bgcolor: 'background.paper',
-	border: '2px solid #000',
-	boxShadow: 24,
-	p: 4,
-}
+import './style.css'
 
-interface BasicModalProps {
+interface IModalCreateClientProps {
 	open: boolean
 	onClose: () => void
 }
@@ -71,7 +62,7 @@ const schema = yup.object().shape({
 		.max(50, 'Tipo do documento deve ter no máximo 50 caracteres'),
 })
 
-export default function BasicModal(props: BasicModalProps) {
+export default function ModalCreateClient(props: IModalCreateClientProps) {
 	const { open, onClose } = props
 	const {
 		register,
@@ -88,22 +79,12 @@ export default function BasicModal(props: BasicModalProps) {
 	}
 
 	return (
-		<Modal
-			open={open}
-			onClose={onClose}
-			aria-labelledby="modal-modal-title"
-			aria-describedby="modal-modal-description"
-		>
-			<Box sx={style}>
-				<Typography
-					id="modal-modal-title"
-					variant="h6"
-					component="h2"
-					align="center"
-				>
+		<Modal open={open} onClose={onClose}>
+			<Box className="modal-box">
+				<Typography variant="h5" component="h2" align="center">
 					Cadastrar Cliente
 				</Typography>
-				<Typography id="modal-modal-description" sx={{ mt: 2 }}>
+				<Typography sx={{ mt: 2 }}>
 					<form
 						onSubmit={handleSubmit(onSubmit)}
 						style={{
@@ -234,7 +215,13 @@ export default function BasicModal(props: BasicModalProps) {
 								{errors.tipoDocumento.message}
 							</Typography>
 						)}
-						<Button className="button-55" type="submit">
+						<Button
+							type="submit"
+							color="primary"
+							fullWidth
+							variant="contained"
+							startIcon={<FileUploadIcon />}
+						>
 							Enviar
 						</Button>
 					</form>

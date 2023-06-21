@@ -9,9 +9,8 @@ export async function deleteClientById(clientId: number): Promise<IClient> {
 		const result = await Swal.fire({
 			title: 'Você tem certeza?',
 			text: 'Essa alteração não pode ser desfeita!',
-			icon: 'warning',
 			showCancelButton: true,
-			confirmButtonColor: 'green',
+			confirmButtonColor: '#3085d6',
 			cancelButtonColor: '#d33',
 			cancelButtonText: 'Cancelar',
 			confirmButtonText: 'Sim, excluir cliente!',

@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import { Button, Card } from '@mui/material'
 import AddIcon from '@mui/icons-material/Add'
 import ClientList from '@app/Clients/page'
-import BasicModal from '@components/Modal'
+import BasicModal from '@components/ClientModal'
 
 import './style.css'
 
