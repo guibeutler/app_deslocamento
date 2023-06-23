@@ -156,7 +156,9 @@ export default function TableClients(props: ITableClientProps) {
 										<TableCell align="center">{item.numeroDocumento}</TableCell>
 									)}
 									{!isMobile && (
-										<TableCell align="center">{item.tipoDocumento}</TableCell>
+										<TableCell align="center">
+											{item.tipoDocumento.toUpperCase()}
+										</TableCell>
 									)}
 									<TableCell align="center">
 										<Link href={`/Clients/${item.id}`}>
@@ -181,7 +183,7 @@ export default function TableClients(props: ITableClientProps) {
 						page={page}
 						onPageChange={handleChangePage}
 						onRowsPerPageChange={handleChangeRowsPerPage}
-						labelRowsPerPage="Itens por página"
+						labelRowsPerPage="Qtd."
 						labelDisplayedRows={({ from, to, count }) =>
 							`${from}-${to} de ${count !== -1 ? count : 'mais de ' + to}`
 						}

@@ -2,7 +2,6 @@ import axios from 'axios'
 import Swal from 'sweetalert2'
 import { URL_BASE } from '@constants/URL_BASE'
 import IClient from '@interfaces/client/client.interface'
-import { getClients } from './getClients'
 
 export async function deleteClientById(clientId: number): Promise<IClient> {
 	try {

@@ -8,6 +8,6 @@ export async function getClients(): Promise<IClient[]> {
 		return response.data
 	} catch (error) {
 		console.error('Failed to fetch clients:', error)
-		throw new Error('Failed to fetch clients') // Lança o erro novamente para que seja tratado externamente
+		throw new Error('Failed to fetch clients')
 	}
 }

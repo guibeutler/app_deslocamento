@@ -1,30 +1,30 @@
 'use client'
 import React, { useState, useEffect } from 'react'
-import { getClients } from './services/getAllClients'
-import BasicModal from '@components/ClientModal'
-import TableClients from '@components/TableClient'
+import { getAllConductors } from './services/getAllConductors'
+import TableConductors from '@components/TableConductor'
+import ModalCreateConductor from '@components/ConductorModal'
 import { CircularProgress } from '@mui/material'
-import IClient from '@/interfaces/client/client.interface'
+import IConductor from '@interfaces/conductor/conductor.interface'
 
 import './style.css'
 
-export default function ClientsListPage() {
-	const [response, setResponse] = useState<IClient[]>([])
+export default function ConductorsListPage() {
+	const [response, setResponse] = useState<IConductor[]>([])
 	const [modalOpen, setModalOpen] = useState(false)
 	const [isLoading, setIsLoading] = useState(true)
 
-	const getAllClients = async () => {
+	const getConductors = async () => {
 		try {
-			const data = await getClients()
+			const data = await getAllConductors()
 			setResponse(data)
 			setIsLoading(false)
 		} catch (error) {
-			console.error('Failed to fetch clients:', error)
+			console.error('Failed to fetch conductors:', error)
 		}
 	}
 
 	useEffect(() => {
-		getAllClients()
+		getConductors()
 	}, [])
 
 	const handleOpenModal = () => {
@@ -33,7 +33,7 @@ export default function ClientsListPage() {
 
 	const handleCloseModal = () => {
 		setModalOpen(false)
-		getAllClients()
+		getConductors()
 	}
 
 	return (
@@ -42,12 +42,12 @@ export default function ClientsListPage() {
 				<CircularProgress />
 			) : (
 				<>
-					<TableClients
+					<TableConductors
 						data={response}
 						onEdit={() => {}}
 						onCreate={handleOpenModal}
 					/>
-					<BasicModal open={modalOpen} onClose={handleCloseModal} />
+					<ModalCreateConductor open={modalOpen} onClose={handleCloseModal} />
 				</>
 			)}
 		</div>
