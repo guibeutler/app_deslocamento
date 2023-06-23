@@ -35,7 +35,7 @@ const Sidebar = () => {
 			text: 'Condutores',
 			icon: <SportsMotorsportsIcon />,
 		},
-		{ value: 'Vehicles', text: 'Veículos', icon: <DriveEtaIcon /> },
+		{ value: 'Vehicles', text: 'Veiculos', icon: <DriveEtaIcon /> },
 		{ value: 'Displacements', text: 'Deslocamentos', icon: <RvHookupIcon /> },
 	]
 

@@ -1,30 +1,30 @@
 'use client'
 import React, { useState, useEffect } from 'react'
-import { getAllConductors } from './services/getAllConductors'
-import TableConductors from '@components/ConductorTable'
-import ModalCreateConductor from '@components/ConductorModal'
 import { CircularProgress } from '@mui/material'
-import IConductor from '@interfaces/conductor/conductor.interface'
 
 import './style.css'
+import IVehicle from '@interfaces/vehicle/vehicle.interface'
+import { getAllVehicle } from './services/getAllVehicle'
+import VehicleTable from '@components/VehicleTable'
+import ModalCreateVehicle from '@components/VehicleModal'
 
-export default function ConductorsListPage() {
-	const [response, setResponse] = useState<IConductor[]>([])
+export default function VehicleListPage() {
+	const [response, setResponse] = useState<IVehicle[]>([])
 	const [modalOpen, setModalOpen] = useState(false)
 	const [isLoading, setIsLoading] = useState(true)
 
-	const getConductors = async () => {
+	const getVehicles = async () => {
 		try {
-			const data = await getAllConductors()
+			const data = await getAllVehicle()
 			setResponse(data)
 			setIsLoading(false)
 		} catch (error) {
-			console.error('Failed to fetch conductors:', error)
+			console.error('Failed to fetch vehicles:', error)
 		}
 	}
 
 	useEffect(() => {
-		getConductors()
+		getVehicles()
 	}, [])
 
 	const handleOpenModal = () => {
@@ -33,7 +33,7 @@ export default function ConductorsListPage() {
 
 	const handleCloseModal = () => {
 		setModalOpen(false)
-		getConductors()
+		getVehicles()
 	}
 
 	return (
@@ -42,12 +42,12 @@ export default function ConductorsListPage() {
 				<CircularProgress />
 			) : (
 				<>
-					<TableConductors
+					<VehicleTable
 						data={response}
 						onEdit={() => {}}
 						onCreate={handleOpenModal}
 					/>
-					<ModalCreateConductor open={modalOpen} onClose={handleCloseModal} />
+					<ModalCreateVehicle open={modalOpen} onClose={handleCloseModal} />
 				</>
 			)}
 		</div>

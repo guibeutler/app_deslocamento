@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react'
 import { getClients } from './services/getAllClients'
 import BasicModal from '@components/ClientModal'
-import TableClients from '@components/TableClient'
+import TableClients from '@components/ClientTable'
 import { CircularProgress } from '@mui/material'
 import IClient from '@/interfaces/client/client.interface'
 

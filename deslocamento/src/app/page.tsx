@@ -1,4 +1,4 @@
-import MyTable from '@components/TableClient'
+import MyTable from '@components/ClientTable'
 
 export default function Home() {
 	return (
