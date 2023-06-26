@@ -1,0 +1,14 @@
+.modal-box {
+	display: flex;
+	flex-direction: column;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: 450px;
+	padding: 16px;
+	gap: 10px;
+	border-radius: 5px;
+	background-color: #ffff;
+	box-shadow: rgba(0, 0, 0, 0.2) 15px 28px 25px -18px;
+}

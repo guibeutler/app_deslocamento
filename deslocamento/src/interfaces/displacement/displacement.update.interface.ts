@@ -1,6 +1,6 @@
 export default interface IDisplacementUpdate {
 	id: number
 	kmFinal: number
-	fimDeslocamento: Date
+	fimDeslocamento: string
 	observacao: string
 }

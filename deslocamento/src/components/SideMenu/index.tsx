@@ -35,7 +35,7 @@ const Sidebar = () => {
 			text: 'Condutores',
 			icon: <SportsMotorsportsIcon />,
 		},
-		{ value: 'Vehicles', text: 'Veiculos', icon: <DriveEtaIcon /> },
+		{ value: 'Vehicles', text: 'Veículos', icon: <DriveEtaIcon /> },
 		{ value: 'Displacements', text: 'Deslocamentos', icon: <RvHookupIcon /> },
 	]
 
@@ -62,7 +62,11 @@ const Sidebar = () => {
 							>
 								<ListItem key={index}>
 									<ListItemIcon>{item.icon}</ListItemIcon>
-									<ListItemText primary={item.text} />
+									<ListItemText
+										primary={item.text
+											.normalize('NFD')
+											.replace(/[\u0300-\u036f]/g, '')}
+									/>
 								</ListItem>
 							</Button>
 						</Link>

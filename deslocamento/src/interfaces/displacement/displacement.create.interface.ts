@@ -1,6 +1,6 @@
 export default interface IDisplacementCreate {
 	kmInicial: number
-	inicioDeslocamento: Date
+	inicioDeslocamento: string
 	checkList: string
 	motivo: string
 	observacao: string

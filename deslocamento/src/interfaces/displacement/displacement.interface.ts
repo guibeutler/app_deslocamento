@@ -2,8 +2,8 @@ export default interface IDisplacement {
 	id: number
 	kmInicial: number
 	kmFinal: number
-	inicioDeslocamento: Date
-	fimDeslocamento: Date
+	inicioDeslocamento: string
+	fimDeslocamento: string
 	checkList: string
 	motivo: string
 	observacao: string
