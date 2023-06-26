@@ -55,53 +55,9 @@ export default function TableDisplacement(props: IDisplacementTableProps) {
 		setPage(0)
 	}
 
-	const mockData = [
-		{
-			id: 0,
-			kmInicial: 0,
-			kmFinal: 0,
-			inicioDeslocamento: '2023-06-24T01:12:39.467Z',
-			fimDeslocamento: null,
-			checkList: 'Finalizado',
-			motivo: 'string',
-			observacao:
-				'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum a dolor ipsum. Duis eu egestas justo. Aenean pharetra libero risus. Aliquam sed ornare dolor. Sed iaculis felis ac nisl convallis, ac sodales nisi tempus. Sed pharetra velit massa, in volutpat justo accumsan a. Pellentesque fermentum dictum leo, eu vehicula nisi egestas non. Cras euismod massa est, et cursus tortor sagittis eget. Morbi dolor massa, posuere ac placerat quis, maximus facilisis diam. Nulla facilisi. Fusce tortor tortor, molestie sed laoreet quis, pulvinar mollis nibh. Morbi at commodo mauris, at porta ex.',
-			idCondutor: 0,
-			idVeiculo: 0,
-			idCliente: 0,
-		},
-		{
-			id: 1,
-			kmInicial: 0,
-			kmFinal: 0,
-			inicioDeslocamento: '2023-06-24T01:12:39.467Z',
-			fimDeslocamento: null,
-			checkList: 'Em andamento',
-			motivo: 'string',
-			observacao: 'string',
-			idCondutor: 0,
-			idVeiculo: 0,
-			idCliente: 0,
-		},
-		{
-			id: 3,
-			kmInicial: 0,
-			kmFinal: 0,
-			inicioDeslocamento: '2023-06-24T01:12:39.467Z',
-			fimDeslocamento: null,
-			checkList: 'Não Iniciado',
-			motivo: 'string',
-			observacao: 'string',
-			idCondutor: 0,
-			idVeiculo: 0,
-			idCliente: 0,
-		},
-	]
-
 	const startIndex = page * rowsPerPage
 	const endIndex = startIndex + rowsPerPage
 	const slicedData = data.slice(startIndex, endIndex)
-	console.log(slicedData)
 
 	return (
 		<div className="main-container">

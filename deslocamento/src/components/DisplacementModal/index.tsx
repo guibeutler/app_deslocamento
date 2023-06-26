@@ -96,7 +96,6 @@ export default function ModalCreateDisplacement(
 			inicioDeslocamento: formattedDate,
 		}
 		createDisplacement(newData)
-		console.log(newData)
 		reset()
 		onClose()
 	}
@@ -208,7 +207,6 @@ export default function ModalCreateDisplacement(
 												label="Inicio Deslocamento"
 												value={field.value}
 												onChange={(date) => {
-													console.log(date)
 													field.onChange(date)
 												}}
 												format="DD/MM/YYYY"

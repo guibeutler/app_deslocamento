@@ -66,7 +66,6 @@ export default function ModalCreateConductor(
 			vencimentoHabilitacao: formattedDate,
 		}
 		createConductor(newData)
-		console.log(newData)
 		reset()
 		onClose()
 	}
@@ -142,7 +141,6 @@ export default function ModalCreateConductor(
 											<DatePicker
 												value={field.value}
 												onChange={(date) => {
-													console.log(date)
 													field.onChange(date)
 												}}
 												format="DD/MM/YYYY"

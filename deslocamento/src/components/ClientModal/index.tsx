@@ -74,7 +74,6 @@ export default function ModalCreateClient(props: IModalCreateClientProps) {
 	})
 	const onSubmit: SubmitHandler<IClientCreate> = (data) => {
 		createClient(data)
-		console.log('createCliente: cliquei')
 		reset()
 		onClose()
 	}
