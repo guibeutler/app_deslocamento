@@ -1,6 +1,7 @@
 'use client'
 import React, { ChangeEvent, useState } from 'react'
 import Link from 'next/link'
+import { generateRandomColor } from '@constants/colors'
 import {
 	Table,
 	TableBody,
@@ -21,13 +22,6 @@ import { Edit, Add } from '@mui/icons-material'
 import IVehicle from '@interfaces/vehicle/vehicle.interface'
 
 import './style.css'
-
-const generateRandomColor = () => {
-	const hue = Math.floor(Math.random() * 360)
-	const saturation = 70
-	const lightness = 50
-	return `hsl(${hue}, ${saturation}%, ${lightness}%)`
-}
 
 interface IVehicleTableProps {
 	data: IVehicle[]

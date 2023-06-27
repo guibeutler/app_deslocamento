@@ -9,14 +9,14 @@ import IDisplacement from '@interfaces/displacement/displacement.interface'
 import './style.css'
 
 export default function DisplacementsListPage() {
-	const [response, setResponse] = useState<IDisplacement[]>([])
+	const [displacement, setDisplacement] = useState<IDisplacement[]>([])
 	const [modalOpen, setModalOpen] = useState(false)
 	const [isLoading, setIsLoading] = useState(true)
 
 	const fetchDisplacement = async () => {
 		try {
 			const data = await getAllDisplacement()
-			setResponse(data)
+			setDisplacement(data)
 			setIsLoading(false)
 		} catch (error) {
 			console.error('Failed to fetch displacements:', error)
@@ -43,7 +43,7 @@ export default function DisplacementsListPage() {
 			) : (
 				<>
 					<TableDisplacement
-						data={response}
+						data={displacement}
 						onEdit={() => {}}
 						onCreate={handleOpenModal}
 					/>

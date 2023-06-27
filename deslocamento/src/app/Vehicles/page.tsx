@@ -1,22 +1,22 @@
 'use client'
 import React, { useState, useEffect } from 'react'
-import { CircularProgress } from '@mui/material'
-
-import './style.css'
-import IVehicle from '@interfaces/vehicle/vehicle.interface'
 import { getAllVehicle } from './services/getAllVehicle'
 import VehicleTable from '@components/VehicleTable'
 import ModalCreateVehicle from '@components/VehicleModal'
+import { CircularProgress } from '@mui/material'
+import IVehicle from '@interfaces/vehicle/vehicle.interface'
+
+import './style.css'
 
 export default function VehicleListPage() {
-	const [response, setResponse] = useState<IVehicle[]>([])
+	const [vehicle, setVehicle] = useState<IVehicle[]>([])
 	const [modalOpen, setModalOpen] = useState(false)
 	const [isLoading, setIsLoading] = useState(true)
 
-	const getVehicles = async () => {
+	const fetchVehicle = async () => {
 		try {
 			const data = await getAllVehicle()
-			setResponse(data)
+			setVehicle(data)
 			setIsLoading(false)
 		} catch (error) {
 			console.error('Failed to fetch vehicles:', error)
@@ -24,7 +24,7 @@ export default function VehicleListPage() {
 	}
 
 	useEffect(() => {
-		getVehicles()
+		fetchVehicle()
 	}, [])
 
 	const handleOpenModal = () => {
@@ -33,7 +33,7 @@ export default function VehicleListPage() {
 
 	const handleCloseModal = () => {
 		setModalOpen(false)
-		getVehicles()
+		fetchVehicle()
 	}
 
 	return (
@@ -43,7 +43,7 @@ export default function VehicleListPage() {
 			) : (
 				<>
 					<VehicleTable
-						data={response}
+						data={vehicle}
 						onEdit={() => {}}
 						onCreate={handleOpenModal}
 					/>

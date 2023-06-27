@@ -3,7 +3,15 @@ import * as yup from 'yup'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useForm, SubmitHandler } from 'react-hook-form'
 import { createVehicle } from '@app/Vehicles/services/createVehicle'
-import { Box, Button, Typography, Modal, TextField } from '@mui/material'
+import {
+	Box,
+	Button,
+	Typography,
+	Modal,
+	TextField,
+	useTheme,
+	useMediaQuery,
+} from '@mui/material'
 import FileUploadIcon from '@mui/icons-material/FileUpload'
 import IVehicleCreate from '@interfaces/vehicle/vehicle.create.interface'
 
@@ -47,6 +55,9 @@ export default function ModalCreateVehicle(props: IVehicleModalProps) {
 		resolver: yupResolver(schema),
 	})
 
+	const theme = useTheme()
+	const isMobile = useMediaQuery(theme.breakpoints.down('sm'))
+
 	const onSubmit: SubmitHandler<IVehicleCreate> = (data) => {
 		createVehicle(data)
 		reset()
@@ -55,7 +66,7 @@ export default function ModalCreateVehicle(props: IVehicleModalProps) {
 
 	return (
 		<Modal open={open} onClose={onClose}>
-			<Box className="modal-box">
+			<Box className="modal-box" sx={{ maxWidth: isMobile ? '95%' : 500 }}>
 				<Typography variant="h5" component="h2" align="center">
 					Cadastrar Veículo
 				</Typography>
