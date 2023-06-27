@@ -189,6 +189,7 @@ export default function ConductorDetailsPage({
 								display: 'flex',
 								gap: isMobile ? '8px' : '15px',
 								padding: '12px 0px',
+								width: '95%',
 							}}
 						>
 							<Button

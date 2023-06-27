@@ -1,4 +1,5 @@
 import React from 'react'
+import dayjs from 'dayjs'
 import { createConductor } from '@app/Conductors/services/createConductor'
 import { DatePicker } from '@mui/x-date-pickers/DatePicker'
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
@@ -13,12 +14,13 @@ import {
 	Modal,
 	TextField,
 	FormControl,
+	useTheme,
+	useMediaQuery,
 } from '@mui/material'
 import FileUploadIcon from '@mui/icons-material/FileUpload'
 import IConductorCreate from '@interfaces/conductor/conductor.create.interface'
 
 import './style.css'
-import dayjs from 'dayjs'
 
 interface IModalCreateConductorProps {
 	open: boolean
@@ -59,6 +61,10 @@ export default function ModalCreateConductor(
 	} = useForm<IConductorCreate>({
 		resolver: yupResolver(schema),
 	})
+
+	const theme = useTheme()
+	const isMobile = useMediaQuery(theme.breakpoints.down('sm'))
+
 	const onSubmit: SubmitHandler<IConductorCreate> = (data) => {
 		const formattedDate = dayjs(data.vencimentoHabilitacao).toISOString()
 		const newData = {
@@ -72,7 +78,7 @@ export default function ModalCreateConductor(
 
 	return (
 		<Modal open={open} onClose={onClose}>
-			<Box className="modal-box">
+			<Box className="modal-box" sx={{ maxWidth: isMobile ? '95%' : 500 }}>
 				<Typography variant="h5" component="h2" align="center">
 					Cadastrar Condutor
 				</Typography>
@@ -137,7 +143,7 @@ export default function ModalCreateConductor(
 							render={({ field, ...props }) => {
 								return (
 									<LocalizationProvider dateAdapter={AdapterDayjs}>
-										<FormControl size="small">
+										<FormControl fullWidth size="small">
 											<DatePicker
 												value={field.value}
 												onChange={(date) => {

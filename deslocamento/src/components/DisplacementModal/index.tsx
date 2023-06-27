@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import dayjs from 'dayjs'
-import { getClients } from '@app/Clients/services/getAllClients'
+import { getAllClients } from '@app/Clients/services/getAllClients'
 import { getAllVehicle } from '@app/Vehicles/services/getAllVehicle'
 import { getAllConductors } from '@app/Conductors/services/getAllConductors'
 import { createDisplacement } from '@app/Displacements/services/createDisplacement'
@@ -76,7 +76,7 @@ export default function ModalCreateDisplacement(
 	useEffect(() => {
 		async function fetchData() {
 			try {
-				const clients = await getClients()
+				const clients = await getAllClients()
 				const conductors = await getAllConductors()
 				const vehicles = await getAllVehicle()
 				setAllClients(clients)

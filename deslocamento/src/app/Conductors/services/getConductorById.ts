@@ -6,8 +6,8 @@ export async function getConductorById(
 	conductorId: number
 ): Promise<IConductor> {
 	try {
-		const response = await axios.get(`${URL_BASE}/Condutor/${conductorId}`)
-		return response.data
+		const { data } = await axios.get(`${URL_BASE}/Condutor/${conductorId}`)
+		return data
 	} catch (error) {
 		console.error('Failed to fetch conductor:', error)
 		throw new Error('Failed to fetch conductorId')

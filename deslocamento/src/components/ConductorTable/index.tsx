@@ -1,6 +1,8 @@
 'use client'
 import React, { ChangeEvent, useState } from 'react'
+import dayjs from 'dayjs'
 import Link from 'next/link'
+import { generateRandomColor } from '@constants/colors'
 import {
 	Table,
 	TableBody,
@@ -21,14 +23,6 @@ import { Edit, Add } from '@mui/icons-material'
 import IConductor from '@interfaces/conductor/conductor.interface'
 
 import './style.css'
-import dayjs from 'dayjs'
-
-const generateRandomColor = () => {
-	const hue = Math.floor(Math.random() * 360)
-	const saturation = 70
-	const lightness = 50
-	return `hsl(${hue}, ${saturation}%, ${lightness}%)`
-}
 
 interface ITableConductorProps {
 	data: IConductor[]
@@ -64,24 +58,15 @@ export default function TableConductors(props: ITableConductorProps) {
 	const startIndex = page * rowsPerPage
 	const endIndex = startIndex + rowsPerPage
 	const slicedData = data.slice(startIndex, endIndex)
-	console.log(slicedData)
 
 	return (
 		<div className="main-container">
 			{!data.length ? (
 				<div
+					className="empty-container"
 					style={{
-						marginTop: '15px',
-						boxShadow: 'rgba(0, 0, 0, 0.2) 15px 28px 25px -18px',
-						borderRadius: '5px',
 						width: isMobile ? 350 : 400,
 						height: 200,
-						backgroundColor: '#ffff',
-						display: 'flex',
-						flexDirection: 'column',
-						justifyContent: 'center',
-						alignItems: 'center',
-						gap: '10px',
 					}}
 				>
 					<Typography variant="h6">NENHUM CONDUTOR ENCONTRADO!</Typography>

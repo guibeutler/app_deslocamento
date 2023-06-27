@@ -1,22 +1,22 @@
 'use client'
 import React, { useState, useEffect } from 'react'
 import { getAllConductors } from './services/getAllConductors'
-import TableConductors from '@components/ConductorTable'
 import ModalCreateConductor from '@components/ConductorModal'
+import TableConductors from '@components/ConductorTable'
 import { CircularProgress } from '@mui/material'
 import IConductor from '@interfaces/conductor/conductor.interface'
 
 import './style.css'
 
 export default function ConductorsListPage() {
-	const [response, setResponse] = useState<IConductor[]>([])
+	const [conductors, setConductors] = useState<IConductor[]>([])
 	const [modalOpen, setModalOpen] = useState(false)
 	const [isLoading, setIsLoading] = useState(true)
 
-	const getConductors = async () => {
+	const fetchConductors = async () => {
 		try {
 			const data = await getAllConductors()
-			setResponse(data)
+			setConductors(data)
 			setIsLoading(false)
 		} catch (error) {
 			console.error('Failed to fetch conductors:', error)
@@ -24,7 +24,7 @@ export default function ConductorsListPage() {
 	}
 
 	useEffect(() => {
-		getConductors()
+		fetchConductors()
 	}, [])
 
 	const handleOpenModal = () => {
@@ -33,7 +33,7 @@ export default function ConductorsListPage() {
 
 	const handleCloseModal = () => {
 		setModalOpen(false)
-		getConductors()
+		fetchConductors()
 	}
 
 	return (
@@ -43,7 +43,7 @@ export default function ConductorsListPage() {
 			) : (
 				<>
 					<TableConductors
-						data={response}
+						data={conductors}
 						onEdit={() => {}}
 						onCreate={handleOpenModal}
 					/>

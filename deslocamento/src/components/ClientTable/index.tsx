@@ -81,7 +81,11 @@ export default function TableClients(props: ITableClientProps) {
 			) : (
 				<TableContainer
 					component={Paper}
-					style={{ maxWidth: '95vw', maxHeight: '95vh' }}
+					style={{
+						maxWidth: '95vw',
+						maxHeight: '95vh',
+						boxShadow: 'rgba(0, 0, 0, 0.2) 15px 28px 25px -18px',
+					}}
 				>
 					<Table size="small">
 						<TableHead>
