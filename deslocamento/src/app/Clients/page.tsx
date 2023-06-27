@@ -1,9 +1,9 @@
 'use client'
 import React, { useState, useEffect } from 'react'
 import { getAllClients } from './services/getAllClients'
+import Loader from '@components/Loader'
 import ModalCreateClient from '@components/ClientModal'
 import TableClients from '@components/ClientTable'
-import { CircularProgress } from '@mui/material'
 import IClient from '@interfaces/client/client.interface'
 
 import './style.css'
@@ -37,7 +37,7 @@ export default function ClientsListPage() {
 	return (
 		<div className="main-container">
 			{isLoading ? (
-				<CircularProgress />
+				<Loader />
 			) : (
 				<>
 					<TableClients

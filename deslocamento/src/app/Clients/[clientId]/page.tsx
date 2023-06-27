@@ -4,10 +4,10 @@ import { useRouter } from 'next/navigation'
 import { getClientById } from '../services/getClientById'
 import { deleteClientById } from '../services/deleteClient'
 import { updateClient } from '../services/updateClient'
+import Loader from '@components/Loader'
 import {
 	Button,
 	Card,
-	CircularProgress,
 	Box,
 	TextField,
 	CardContent,
@@ -99,7 +99,7 @@ export default function ClientDetailsPage({
 	return (
 		<div className="main-container">
 			{isLoading ? (
-				<CircularProgress disableShrink />
+				<Loader />
 			) : (
 				<>
 					<Card

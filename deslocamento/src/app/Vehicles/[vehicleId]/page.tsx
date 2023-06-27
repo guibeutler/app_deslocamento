@@ -4,10 +4,10 @@ import { useRouter } from 'next/navigation'
 import { getVehicleById } from '../services/getVehicleById'
 import { deleteVehicleById } from '../services/deleteVehicle'
 import { updateVehicle } from '../services/updateVehicle'
+import Loader from '@components/Loader'
 import {
 	Button,
 	Card,
-	CircularProgress,
 	Box,
 	TextField,
 	CardContent,
@@ -92,7 +92,7 @@ export default function VehicleDetailsPage({
 	return (
 		<div className="main-container">
 			{isLoading ? (
-				<CircularProgress disableShrink />
+				<Loader />
 			) : (
 				<>
 					<Card

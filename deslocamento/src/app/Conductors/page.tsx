@@ -1,9 +1,9 @@
 'use client'
 import React, { useState, useEffect } from 'react'
 import { getAllConductors } from './services/getAllConductors'
+import Loader from '@components/Loader'
 import ModalCreateConductor from '@components/ConductorModal'
 import TableConductors from '@components/ConductorTable'
-import { CircularProgress } from '@mui/material'
 import IConductor from '@interfaces/conductor/conductor.interface'
 
 import './style.css'
@@ -39,7 +39,7 @@ export default function ConductorsListPage() {
 	return (
 		<div className="main-container">
 			{isLoading ? (
-				<CircularProgress />
+				<Loader />
 			) : (
 				<>
 					<TableConductors

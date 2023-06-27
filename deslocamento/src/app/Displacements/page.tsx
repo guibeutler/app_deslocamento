@@ -1,9 +1,9 @@
 'use client'
 import React, { useState, useEffect } from 'react'
 import { getAllDisplacement } from './services/getAllDisplacement'
+import Loader from '@components/Loader'
 import TableDisplacement from '@components/DisplacementTable'
 import ModalCreateDisplacement from '@components/DisplacementModal'
-import { CircularProgress } from '@mui/material'
 import IDisplacement from '@interfaces/displacement/displacement.interface'
 
 import './style.css'
@@ -39,7 +39,7 @@ export default function DisplacementsListPage() {
 	return (
 		<div className="main-container">
 			{isLoading ? (
-				<CircularProgress />
+				<Loader />
 			) : (
 				<>
 					<TableDisplacement

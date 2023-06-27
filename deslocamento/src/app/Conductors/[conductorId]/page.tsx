@@ -8,10 +8,10 @@ import { updateConductor } from '../services/updateConductor'
 import { DatePicker } from '@mui/x-date-pickers/DatePicker'
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider'
+import Loader from '@components/Loader'
 import {
 	Button,
 	Card,
-	CircularProgress,
 	Box,
 	TextField,
 	CardContent,
@@ -106,7 +106,7 @@ export default function ConductorDetailsPage({
 	return (
 		<div className="main-container">
 			{isLoading ? (
-				<CircularProgress disableShrink />
+				<Loader />
 			) : (
 				<>
 					<Card

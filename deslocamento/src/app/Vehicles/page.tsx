@@ -1,9 +1,9 @@
 'use client'
 import React, { useState, useEffect } from 'react'
 import { getAllVehicle } from './services/getAllVehicle'
-import VehicleTable from '@components/VehicleTable'
+import Loader from '@components/Loader'
 import ModalCreateVehicle from '@components/VehicleModal'
-import { CircularProgress } from '@mui/material'
+import VehicleTable from '@components/VehicleTable'
 import IVehicle from '@interfaces/vehicle/vehicle.interface'
 
 import './style.css'
@@ -39,7 +39,7 @@ export default function VehicleListPage() {
 	return (
 		<div className="main-container">
 			{isLoading ? (
-				<CircularProgress />
+				<Loader />
 			) : (
 				<>
 					<VehicleTable
