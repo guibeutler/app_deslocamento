@@ -1,22 +1,22 @@
 'use client'
 import React, { useState, useEffect } from 'react'
-import { getClients } from './services/getAllClients'
-import BasicModal from '@components/ClientModal'
+import { getAllClients } from './services/getAllClients'
+import ModalCreateClient from '@components/ClientModal'
 import TableClients from '@components/ClientTable'
 import { CircularProgress } from '@mui/material'
-import IClient from '@/interfaces/client/client.interface'
+import IClient from '@interfaces/client/client.interface'
 
 import './style.css'
 
 export default function ClientsListPage() {
-	const [response, setResponse] = useState<IClient[]>([])
+	const [clients, setClients] = useState<IClient[]>([])
 	const [modalOpen, setModalOpen] = useState(false)
 	const [isLoading, setIsLoading] = useState(true)
 
-	const getAllClients = async () => {
+	const fetchClients = async () => {
 		try {
-			const data = await getClients()
-			setResponse(data)
+			const data = await getAllClients()
+			setClients(data)
 			setIsLoading(false)
 		} catch (error) {
 			console.error('Failed to fetch clients:', error)
@@ -24,16 +24,14 @@ export default function ClientsListPage() {
 	}
 
 	useEffect(() => {
-		getAllClients()
+		fetchClients()
 	}, [])
 
-	const handleOpenModal = () => {
-		setModalOpen(true)
-	}
+	const handleOpenModal = () => setModalOpen(true)
 
 	const handleCloseModal = () => {
 		setModalOpen(false)
-		getAllClients()
+		fetchClients()
 	}
 
 	return (
@@ -43,11 +41,11 @@ export default function ClientsListPage() {
 			) : (
 				<>
 					<TableClients
-						data={response}
+						data={clients}
 						onEdit={() => {}}
 						onCreate={handleOpenModal}
 					/>
-					<BasicModal open={modalOpen} onClose={handleCloseModal} />
+					<ModalCreateClient open={modalOpen} onClose={handleCloseModal} />
 				</>
 			)}
 		</div>

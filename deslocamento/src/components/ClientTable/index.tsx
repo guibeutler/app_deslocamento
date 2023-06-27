@@ -1,6 +1,7 @@
 'use client'
 import React, { ChangeEvent, useState } from 'react'
 import Link from 'next/link'
+import { generateRandomColor } from '@constants/colors'
 import {
 	Table,
 	TableBody,
@@ -18,17 +19,9 @@ import {
 	Button,
 } from '@mui/material'
 import { Edit, Add } from '@mui/icons-material'
+import IClient from '@interfaces/client/client.interface'
 
 import './style.css'
-import IClient from '@interfaces/client/client.interface'
-import { createClient } from '@app/Clients/services/createClient'
-
-const generateRandomColor = () => {
-	const hue = Math.floor(Math.random() * 360)
-	const saturation = 70
-	const lightness = 50
-	return `hsl(${hue}, ${saturation}%, ${lightness}%)`
-}
 
 interface ITableClientProps {
 	data: IClient[]
@@ -54,34 +47,25 @@ export default function TableClients(props: ITableClientProps) {
 		newPage: number
 	) => {
 		setPage(newPage)
-		console.log('newPage', newPage)
 	}
 
 	const handleChangeRowsPerPage = (event: ChangeEvent<HTMLInputElement>) => {
 		setRowsPerPage(parseInt(event.target.value, 10))
 		setPage(0)
-		console.log(event)
 	}
 
 	const startIndex = page * rowsPerPage
 	const endIndex = startIndex + rowsPerPage
 	const slicedData = data.slice(startIndex, endIndex)
+
 	return (
 		<div className="main-container">
 			{!data.length ? (
 				<div
+					className="empty-container"
 					style={{
-						marginTop: '15px',
-						boxShadow: 'rgba(0, 0, 0, 0.2) 15px 28px 25px -18px',
-						borderRadius: '5px',
 						width: isMobile ? 350 : 400,
 						height: 200,
-						backgroundColor: '#ffff',
-						display: 'flex',
-						flexDirection: 'column',
-						justifyContent: 'center',
-						alignItems: 'center',
-						gap: '10px',
 					}}
 				>
 					<Typography variant="h6">NENHUM CLIENTE ENCONTRADO!</Typography>

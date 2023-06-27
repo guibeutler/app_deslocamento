@@ -16,13 +16,13 @@ export async function deleteClientById(clientId: number): Promise<IClient> {
 		})
 
 		if (result.isConfirmed) {
-			const response = await axios.delete(`${URL_BASE}/Cliente/${clientId}`, {
+			const { data } = await axios.delete(`${URL_BASE}/Cliente/${clientId}`, {
 				data: {
 					id: clientId,
 				},
 			})
 			Swal.fire('Deletado!', 'Cliente excluido com sucesso..', 'success')
-			return response.data
+			return data
 		} else {
 			throw new Error('Exclusão cancelada.')
 		}

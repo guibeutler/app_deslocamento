@@ -11,6 +11,10 @@ import {
 	TextField,
 	Select,
 	MenuItem,
+	FormControl,
+	InputLabel,
+	useMediaQuery,
+	useTheme,
 } from '@mui/material'
 import FileUploadIcon from '@mui/icons-material/FileUpload'
 import IClientCreate from '@interfaces/client/client.create.interface'
@@ -72,6 +76,10 @@ export default function ModalCreateClient(props: IModalCreateClientProps) {
 	} = useForm<IClientCreate>({
 		resolver: yupResolver(schema),
 	})
+
+	const theme = useTheme()
+	const isMobile = useMediaQuery(theme.breakpoints.down('sm'))
+
 	const onSubmit: SubmitHandler<IClientCreate> = (data) => {
 		createClient(data)
 		reset()
@@ -80,7 +88,7 @@ export default function ModalCreateClient(props: IModalCreateClientProps) {
 
 	return (
 		<Modal open={open} onClose={onClose}>
-			<Box className="modal-box">
+			<Box className="modal-box" sx={{ maxWidth: isMobile ? '95%' : 500 }}>
 				<Typography variant="h5" component="h2" align="center">
 					Cadastrar Cliente
 				</Typography>
@@ -169,22 +177,22 @@ export default function ModalCreateClient(props: IModalCreateClientProps) {
 								{errors.cidade.message}
 							</Typography>
 						)}
-						<Select
-							{...register('uf')}
-							fullWidth
-							size="small"
-							id="outlined-basic"
-							label="Estado"
-							variant="outlined"
-							name="uf"
-							error={!!errors.uf}
-						>
-							{UF.estadosDoBrasil.map((estado) => (
-								<MenuItem key={estado} value={estado}>
-									{estado}
-								</MenuItem>
-							))}
-						</Select>
+						<FormControl size="small">
+							<InputLabel>Estado</InputLabel>
+
+							<Select
+								{...register('uf')}
+								label="Estado"
+								name="uf"
+								error={!!errors.uf}
+							>
+								{UF.estadosDoBrasil.map((estado) => (
+									<MenuItem key={estado} value={estado}>
+										{estado}
+									</MenuItem>
+								))}
+							</Select>
+						</FormControl>
 						<TextField
 							{...register('numeroDocumento')}
 							fullWidth
