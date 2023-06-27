@@ -20,6 +20,8 @@ import {
 	Select,
 	MenuItem,
 	InputLabel,
+	useTheme,
+	useMediaQuery,
 } from '@mui/material'
 import FileUploadIcon from '@mui/icons-material/FileUpload'
 import IDisplacementCreate from '@interfaces/displacement/displacement.create.interface'
@@ -54,6 +56,9 @@ export default function ModalCreateDisplacement(
 	const [allVehicles, setAllVehicles] = useState<IVehicle[]>([])
 	const [checkList, setCheckList] = useState([])
 	const [reason, setReason] = useState([])
+
+	const theme = useTheme()
+	const isMobile = useMediaQuery(theme.breakpoints.down('sm'))
 
 	const handleCheckList = (event: any) => {
 		setCheckList(event.target.value)
@@ -102,7 +107,7 @@ export default function ModalCreateDisplacement(
 
 	return (
 		<Modal open={open} onClose={onClose}>
-			<Box className="modal-box">
+			<Box className="modal-box" sx={{ maxWidth: isMobile ? '95%' : 500 }}>
 				<Typography variant="h5" component="h2" align="center">
 					Cadastrar Deslocamento
 				</Typography>

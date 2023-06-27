@@ -1,19 +1,19 @@
 'use client'
 import React, { useState, useEffect } from 'react'
+import { getAllDisplacement } from './services/getAllDisplacement'
+import TableDisplacement from '@components/DisplacementTable'
 import ModalCreateDisplacement from '@components/DisplacementModal'
 import { CircularProgress } from '@mui/material'
 import IDisplacement from '@interfaces/displacement/displacement.interface'
 
 import './style.css'
-import { getAllDisplacement } from './services/getAllDisplacement'
-import TableDisplacement from '@components/DisplacementTable'
 
 export default function DisplacementsListPage() {
 	const [response, setResponse] = useState<IDisplacement[]>([])
 	const [modalOpen, setModalOpen] = useState(false)
 	const [isLoading, setIsLoading] = useState(true)
 
-	const getAllDisplacements = async () => {
+	const fetchDisplacement = async () => {
 		try {
 			const data = await getAllDisplacement()
 			setResponse(data)
@@ -24,7 +24,7 @@ export default function DisplacementsListPage() {
 	}
 
 	useEffect(() => {
-		getAllDisplacements()
+		fetchDisplacement()
 	}, [])
 
 	const handleOpenModal = () => {
@@ -33,7 +33,7 @@ export default function DisplacementsListPage() {
 
 	const handleCloseModal = () => {
 		setModalOpen(false)
-		getAllDisplacements()
+		fetchDisplacement()
 	}
 
 	return (

@@ -111,16 +111,26 @@ export default function TableDisplacement(props: IDisplacementTableProps) {
 								</TableRow>
 								<TableRow>
 									<TableCell align="center">ID</TableCell>
-									<TableCell align="center">Id Cliente</TableCell>
-									<TableCell align="center">Id Condutor</TableCell>
-									<TableCell align="center">Id Veículo</TableCell>
-									<TableCell align="center">Checklist</TableCell>
-									<TableCell align="center">Motivo</TableCell>
-									<TableCell align="center">Km Inicial</TableCell>
-									<TableCell align="center">Km Final</TableCell>
+									{!isMobile && (
+										<TableCell align="center">Id Cliente</TableCell>
+									)}
+									{!isMobile && (
+										<TableCell align="center">Id Condutor</TableCell>
+									)}
+									{!isMobile && (
+										<TableCell align="center">Id Veículo</TableCell>
+									)}
+									{!isMobile && <TableCell align="center">Checklist</TableCell>}
+									{!isMobile && <TableCell align="center">Motivo</TableCell>}
+									{!isMobile && (
+										<TableCell align="center">Km Inicial</TableCell>
+									)}
+									{!isMobile && <TableCell align="center">Km Final</TableCell>}
 									<TableCell align="center">Data Início</TableCell>
 									<TableCell align="center">Data Fim</TableCell>
-									<TableCell align="center">Observações</TableCell>
+									{!isMobile && (
+										<TableCell align="center">Observações</TableCell>
+									)}
 									<TableCell align="center">Editar</TableCell>
 								</TableRow>
 							</TableHead>
@@ -128,25 +138,39 @@ export default function TableDisplacement(props: IDisplacementTableProps) {
 								{slicedData.map((item) => (
 									<TableRow key={item.id}>
 										<TableCell align="center">{item.id}</TableCell>
-										<TableCell align="center">{item.idCliente}</TableCell>
-										<TableCell align="center">{item.idCondutor}</TableCell>
-										<TableCell align="center">{item.idVeiculo}</TableCell>
-										<TableCell align="center">
-											<Chip
-												size="small"
-												color={
-													item.checkList === 'Finalizado'
-														? 'success'
-														: item.checkList === 'Em andamento'
-														? 'warning'
-														: 'info'
-												}
-												label={item.checkList}
-											/>
-										</TableCell>
-										<TableCell align="center">{item.motivo}</TableCell>
-										<TableCell align="center">{item.kmInicial}</TableCell>
-										<TableCell align="center">{item.kmFinal}</TableCell>
+										{!isMobile && (
+											<TableCell align="center">{item.idCliente}</TableCell>
+										)}
+										{!isMobile && (
+											<TableCell align="center">{item.idCondutor}</TableCell>
+										)}
+										{!isMobile && (
+											<TableCell align="center">{item.idVeiculo}</TableCell>
+										)}
+										{!isMobile && (
+											<TableCell align="center">
+												<Chip
+													size="small"
+													color={
+														item.checkList === 'Finalizado'
+															? 'success'
+															: item.checkList === 'Em andamento'
+															? 'warning'
+															: 'info'
+													}
+													label={item.checkList}
+												/>
+											</TableCell>
+										)}
+										{!isMobile && (
+											<TableCell align="center">{item.motivo}</TableCell>
+										)}
+										{!isMobile && (
+											<TableCell align="center">{item.kmInicial}</TableCell>
+										)}
+										{!isMobile && (
+											<TableCell align="center">{item.kmFinal}</TableCell>
+										)}
 										<TableCell align="center">
 											{dayjs(item.inicioDeslocamento).format('DD/MM/YYYY')}
 										</TableCell>
@@ -155,15 +179,17 @@ export default function TableDisplacement(props: IDisplacementTableProps) {
 												? dayjs(item.fimDeslocamento).format('DD/MM/YYYY')
 												: '-'}
 										</TableCell>
-										<TableCell align="center">
-											<Tooltip title={item.observacao}>
-												<span>
-													{item.observacao && item.observacao.length > 0
-														? `${item.observacao.split(' ')[0]}...`
-														: '-'}
-												</span>
-											</Tooltip>
-										</TableCell>
+										{!isMobile && (
+											<TableCell align="center">
+												<Tooltip title={item.observacao}>
+													<span>
+														{item.observacao && item.observacao.length > 0
+															? `${item.observacao.split(' ')[0]}...`
+															: '-'}
+													</span>
+												</Tooltip>
+											</TableCell>
+										)}
 										<TableCell align="center">
 											<Link href={`/Displacements/${item.id}`}>
 												<IconButton

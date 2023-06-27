@@ -41,6 +41,7 @@ export default function DisplacementDetailsPage({
 	const [selectedDate, setSelectedDate] = useState(null)
 	const [updatedDisplacement, setUpdatedDisplacement] =
 		useState<IDisplacementUpdate>({} as IDisplacementUpdate)
+
 	const router = useRouter()
 	const theme = useTheme()
 	const isMobile = useMediaQuery(theme.breakpoints.down('sm'))
@@ -195,6 +196,7 @@ export default function DisplacementDetailsPage({
 								display: 'flex',
 								gap: isMobile ? '8px' : '15px',
 								padding: '12px 0px',
+								width: '95%',
 							}}
 						>
 							<Button

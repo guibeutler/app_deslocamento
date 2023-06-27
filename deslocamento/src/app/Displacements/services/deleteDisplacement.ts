@@ -26,7 +26,7 @@ export async function deleteDisplacementById(
 					},
 				}
 			)
-			Swal.fire('Deletado!', 'deslocamento excluido com sucesso..', 'success')
+			Swal.fire('Deletado!', 'deslocamento excluido com sucesso.', 'success')
 			return data
 		} else {
 			throw new Error('Exclusão cancelada.')
