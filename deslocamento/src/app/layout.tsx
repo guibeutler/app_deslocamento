@@ -1,4 +1,3 @@
-'use client'
 import { Header } from '@/components/Header'
 import { Sarabun } from 'next/font/google'
 import './globals.css'

@@ -138,7 +138,7 @@ export default function TableConductors(props: ITableConductorProps) {
 										)}
 										{!isMobile && (
 											<TableCell align="center">
-												{item.catergoriaHabilitacao.toUpperCase()}
+												{item.categoriaHabilitacao.toUpperCase()}
 											</TableCell>
 										)}
 										{!isMobile && (
